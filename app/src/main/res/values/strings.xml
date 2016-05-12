@@ -6,7 +6,7 @@
     <string name="title_activity_detail_antivity">DetailAntivity</string>
     <string name="title_activity_settings">Settings</string>
 
-    <string name="weather_cloud_api_key">YOUR OWN API KEY</string>
+    <string name="weather_cloud_api_key" translatable="false">YOUR OWN API KEY</string>
 
     <!-- Strings related to Settings -->
 
@@ -18,19 +18,20 @@
         based on your message history
     </string>
 
-    <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
+    <string name="pref_location_title">Location</string>
+    <string name="pref_location_default" translatable="false">M5E 1E5</string>
+    <string name="pref_location_key" translatable="false">location</string>
 
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
-    <string-array name="pref_example_list_titles">
-        <item>Always</item>
-        <item>When possible</item>
-        <item>Never</item>
+    <string name="pref_unit_title">Pick Your Units</string>
+    <string name="pref_unit_metric" translatable="false">metric</string> <!-- metric -->
+    <string name="pref_unit_key" translatable="false">unit</string>
+    <string-array name="pref_unit_titles">
+        <item>Metric</item>
+        <item>Imperial</item>
     </string-array>
-    <string-array name="pref_example_list_values">
-        <item>1</item>
-        <item>0</item>
-        <item>-1</item>
+    <string-array name="pref_unit_values">
+        <item>metric</item>
+        <item>imperial</item>
     </string-array>
 
     <!-- Example settings for Data & Sync -->
