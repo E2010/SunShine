@@ -8,7 +8,7 @@ It is still ongoing.
 
 Lesson 1: Create Project SunShine   (Finished)<br/>
 Lesson 2: Connect SunShine to the Cloud (Finished)<br/>
-Lesson 3: New Activities and Intents (Ongoing)<br/>
+Lesson 3: New Activities and Intents (Finished)<br/>
 
 <h2>API KEY</h2>
 This app is just for personal use. But by any chance if someone want to take a look.
