@@ -2,6 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.torstar.sunshine.MainActivity">
+
+    <item
+        android:id="@+id/action_view_location"
+        android:orderInCategory="90"
+        android:title="@string/action_view_location"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

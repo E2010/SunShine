@@ -1,7 +1,10 @@
 package com.torstar.sunshine;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -44,7 +47,19 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_view_location){
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            String location = prefs.getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
+
+            // View User Location on Map App
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            Uri.Builder builder = Uri.parse("geo:0,0?").buildUpon()
+                    .appendQueryParameter("q", location);
+            intent.setData(builder.build());
+            if (intent.resolveActivity(getPackageManager())!=null) {
+                startActivity(intent);
+            }
+        } else if (id == R.id.action_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
             return true;
