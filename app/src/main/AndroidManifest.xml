@@ -37,6 +37,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.torstar.sunshine.MainActivity" />
         </activity>
+
+        <provider
+            android:authorities="com.torstar.sunshine"
+            android:name=".data.WeatherProvider"/>
     </application>
 
 </manifest>
