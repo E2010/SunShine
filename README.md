@@ -10,9 +10,10 @@ Lesson 1: Create Project SunShine   (Finished)<br/>
 Lesson 2: Connect SunShine to the Cloud (Finished)<br/>
 Lesson 3: New Activities and Intents (Finished)<br/>
 Lesson 4A: Activity Lifecycle and Data (Finished)<br/>
+Lesson 4B: Content Provider (Finished)<br/>
 
 <h2>API KEY</h2>
 This app is just for personal use. But by any chance if someone want to take a look.
-Please remeber to change this line in String/value.xml to your own real API Key.
+Please remeber to change this line in app/build.gradle to your own real API Key.
 
-<i>\<string name="weather_cloud_api_key"\>YOUR OWN API KEY\<\/string\></i>
+<i>it.buildConfigField 'String', 'OPEN_WEATHER_MAP_API_KEY', '\\"YOU OWN API KEY\\"'</i>
