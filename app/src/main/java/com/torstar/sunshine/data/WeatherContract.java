@@ -87,15 +87,15 @@ public class WeatherContract {
             return CONTENT_URI.buildUpon().appendPath(locationString).build();
         }
 
-        public static Uri buildWeatherLocationWithStartDate(String locationString, long startDate){
-            long normalizedDate = normalizeDate(startDate);
+        public static Uri buildWeatherLocationWithStartDate(String locationString, long startDateInMillisec){
+            long normalizedDate = normalizeDate(startDateInMillisec);
             return CONTENT_URI.buildUpon().appendPath(locationString).
                     appendQueryParameter(COLUMN_DATE, Long.toString(normalizedDate)).build();
         }
 
-        public static Uri buildWeatherLocationWithDate(String locationString, long date){
+        public static Uri buildWeatherLocationWithDate(String locationString, long dateInMillisec){
             return CONTENT_URI.buildUpon().appendPath(locationString)
-                    .appendPath(Long.toString(normalizeDate(date))).build();
+                    .appendPath(Long.toString(normalizeDate(dateInMillisec))).build();
         }
 
         public static String getLocationStringFromUri(Uri uri){

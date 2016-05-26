@@ -20,7 +20,7 @@ import java.util.Set;
  */
 public class TestUtilities extends AndroidTestCase {
     static final String TEST_LOCATION = "99705";
-    static final long TEST_DATE = 1419033600L;  // December 20th, 2014
+    static final long TEST_DATE = 1419033600000L;  // December 20th, 2014 in milliseconds
 
     static void validateCursor(String error, Cursor valueCursor, ContentValues expectedValues) {
         assertTrue("Empty cursor returned. " + error, valueCursor.moveToFirst());
@@ -47,7 +47,7 @@ public class TestUtilities extends AndroidTestCase {
     static ContentValues createWeatherValues(long locationRowId) {
         ContentValues weatherValues = new ContentValues();
         weatherValues.put(WeatherContract.WeatherEntry.COLUMN_LOC_KEY, locationRowId);
-        weatherValues.put(WeatherContract.WeatherEntry.COLUMN_DATE, TEST_DATE);
+        weatherValues.put(WeatherContract.WeatherEntry.COLUMN_DATE, WeatherContract.normalizeDate(TEST_DATE));
         weatherValues.put(WeatherContract.WeatherEntry.COLUMN_DEGREES, 1.1);
         weatherValues.put(WeatherContract.WeatherEntry.COLUMN_HUMIDITY, 1.2);
         weatherValues.put(WeatherContract.WeatherEntry.COLUMN_PRESSURE, 1.3);
