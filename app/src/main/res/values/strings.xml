@@ -8,8 +8,6 @@
     <string name="title_activity_detail_antivity">DetailAntivity</string>
     <string name="title_activity_settings">Settings</string>
 
-    <string name="weather_cloud_api_key" translatable="false">YOUR OWN API KEY</string>
-
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
@@ -26,14 +24,15 @@
 
     <string name="pref_unit_title">Pick Your Units</string>
     <string name="pref_unit_metric" translatable="false">metric</string> <!-- metric -->
+    <string name="pref_unit_imperial" translatable="false">imperial</string> <!-- metric -->
     <string name="pref_unit_key" translatable="false">unit</string>
     <string-array name="pref_unit_titles">
         <item>Metric</item>
         <item>Imperial</item>
     </string-array>
     <string-array name="pref_unit_values">
-        <item>metric</item>
-        <item>imperial</item>
+        <item>@string/pref_unit_metric</item>
+        <item>@string/pref_unit_imperial</item>
     </string-array>
 
     <!-- Example settings for Data & Sync -->

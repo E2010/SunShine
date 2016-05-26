@@ -98,7 +98,7 @@ public class MainActivityFragment extends Fragment {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         String postCode = prefs.getString(getString(R.string.pref_location_key),
                 getString(R.string.pref_location_default));
-        FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
+        FetchWeatherTask fetchWeatherTask = new FetchWeatherTask(getContext(),weatherListAdapter);
         fetchWeatherTask.execute(postCode);
     }
 

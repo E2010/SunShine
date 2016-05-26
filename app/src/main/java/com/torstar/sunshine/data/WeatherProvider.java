@@ -123,7 +123,7 @@ public class WeatherProvider extends ContentProvider {
                         selectionArgs);
                 break;
             case WEATHER:
-                normalizeDate(values);
+                //normalizeDate(values);
                 rowsUpdated = db.update(
                         WeatherContract.WeatherEntry.TABLE_NAME,
                         values,
@@ -158,7 +158,7 @@ public class WeatherProvider extends ContentProvider {
                 }
                 break;
             case WEATHER:
-                normalizeDate(values);
+                //normalizeDate(values);
                 long _id = db.insert(WeatherContract.WeatherEntry.TABLE_NAME, null, values);
                 if(_id > 0) {
                     returnUri = WeatherContract.WeatherEntry.buildWeatherUri(_id);
@@ -185,7 +185,7 @@ public class WeatherProvider extends ContentProvider {
                 int returnCount = 0;
                 try{
                     for (ContentValues value: values){
-                        normalizeDate(value);
+                        //normalizeDate(value);
                         long _id = db.insert(WeatherContract.WeatherEntry.TABLE_NAME, null, value);
                         if (_id > 0) {
                             returnCount++;
