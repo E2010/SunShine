@@ -14,13 +14,26 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+    private String mLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mLocation = Utility.getPreferredLocation(this);
+
+        // The forecast fragment is added in layout xml file so no need to add again here.
+        // In the code that update record when user change location, will use fragment id instead
+        // of tag now. (will see if this works).
+//        if (savedInstanceState == null) {
+//            getSupportFragmentManager().beginTransaction()
+//                    .add(R.id.fragment,new MainActivityFragment(), FORECASTFRAGMENT_TAG)
+//                    .commit();
+//        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -67,4 +80,21 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String locationSetting = Utility.getPreferredLocation(this);
+
+        if(locationSetting!= null && !locationSetting.equals(mLocation)){
+            MainActivityFragment mf = (MainActivityFragment)getSupportFragmentManager()
+                    .findFragmentById(R.id.fragment);
+            if (mf != null) {
+                mf.onLocationChanged();
+            }
+            mLocation = locationSetting;
+        }
+    }
+
+
 }

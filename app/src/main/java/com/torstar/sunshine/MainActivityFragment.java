@@ -127,12 +127,12 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
         return super.onOptionsItemSelected(menuItem);
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        updateWeather();
-    }
+//
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        //updateWeather();
+//    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -177,6 +177,11 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
         FetchWeatherTask fetchWeatherTask = new FetchWeatherTask(getContext());
         String locationSetting = Utility.getPreferredLocation(getContext());
         fetchWeatherTask.execute(locationSetting);
+    }
+
+    void onLocationChanged(){
+        updateWeather();
+        getLoaderManager().restartLoader(FORECAST_LOADER, null, this);
     }
 
     /*public class FetchWeatherTask extends AsyncTask<String, Void, String[]>{
