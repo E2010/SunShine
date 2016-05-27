@@ -2,6 +2,8 @@ package com.torstar.sunshine;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -12,10 +14,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.util.ArrayList;
+import com.torstar.sunshine.data.WeatherContract;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 public class MainActivityFragment extends Fragment {
     private final String TAG = MainActivityFragment.class.getSimpleName();
 
-    private ArrayAdapter<String> weatherListAdapter;
+    private ForecastAdapter mWeatherListAdapter;
 
     public MainActivityFragment() {
     }
@@ -39,26 +40,33 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.fragment_main, container, false);
 
-        // Listview Adapter
-        weatherListAdapter = new ArrayAdapter<String>(
-                getContext(),
-                R.layout.list_item_forcast,
-                R.id.list_item_forecast_textview,
-                new ArrayList<String>());
+        // Prepare for Adapter, set up Cursor
+        String locationSetting = Utility.getPreferredLocation(getContext());
+
+        String sortOrder = WeatherContract.WeatherEntry.COLUMN_DATE + " ASC";
+
+        Uri uri = WeatherContract.WeatherEntry.buildWeatherLocationWithStartDate(
+                locationSetting,
+                System.currentTimeMillis()
+        );
+        Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, sortOrder);
+
+        // Adapter
+        mWeatherListAdapter = new ForecastAdapter(getContext(), cursor, 0);
 
         // Set Listview Adapter
         ListView weatherListview = (ListView)rootView.findViewById(R.id.listview_forecast);
 
-        weatherListview.setAdapter(weatherListAdapter);
+        weatherListview.setAdapter(mWeatherListAdapter);
 
         weatherListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String weather = weatherListAdapter.getItem(position);
+                //String weather = mWeatherListAdapter.getItem(position);
 
                 // Open Detail View
                 Intent intent = new Intent(getContext(), DetailAntivity.class);
-                intent.putExtra(Intent.EXTRA_TEXT, weather);
+                //intent.putExtra(Intent.EXTRA_TEXT, weather);
 
                 startActivity(intent);
                 //Toast toast = Toast.makeText(getContext(), weather, Toast.LENGTH_SHORT);
@@ -98,8 +106,8 @@ public class MainActivityFragment extends Fragment {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         String postCode = prefs.getString(getString(R.string.pref_location_key),
                 getString(R.string.pref_location_default));
-        FetchWeatherTask fetchWeatherTask = new FetchWeatherTask(getContext(),weatherListAdapter);
-        fetchWeatherTask.execute(postCode);
+        //FetchWeatherTask fetchWeatherTask = new FetchWeatherTask(getContext(),mWeatherListAdapter);
+        //fetchWeatherTask.execute(postCode);
     }
 
     /*public class FetchWeatherTask extends AsyncTask<String, Void, String[]>{
@@ -195,10 +203,10 @@ public class MainActivityFragment extends Fragment {
         @Override
         protected void onPostExecute(String[] daysWeather) {
             if (daysWeather!= null) {
-                weatherListAdapter.clear();
-                weatherListAdapter.addAll(daysWeather);
+                mWeatherListAdapter.clear();
+                mWeatherListAdapter.addAll(daysWeather);
             }
-            //weatherListAdapter.notifyDataSetChanged();
+            //mWeatherListAdapter.notifyDataSetChanged();
         }
 
         *//* The date/time conversion code is going to be moved outside the asynctask later,

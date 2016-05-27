@@ -3,12 +3,9 @@ package com.torstar.sunshine;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 
@@ -24,7 +21,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 
@@ -131,45 +127,45 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
     @Override
     protected void onPostExecute(String[] strings) {
-        if (strings != null && mForecastAdapter != null){
-            mForecastAdapter.clear();
-            mForecastAdapter.addAll(strings);
-        }
+//        if (strings != null && mForecastAdapter != null){
+//            mForecastAdapter.clear();
+//            mForecastAdapter.addAll(strings);
+//        }
     }
 
-    public FetchWeatherTask(Context context, ArrayAdapter<String> forecastAdapter){
+    public FetchWeatherTask(Context context){
         mContext = context;
-        mForecastAdapter = forecastAdapter;
+        //mForecastAdapter = forecastAdapter;
     }
 
-    private String getReadableDateString(long timeInDays){
-        long time = timeInDays * 24 * 60 * 60 * 1000;
-        Date date = new Date(time);
+//    private String getReadableDateString(long timeInDays){
+//        long time = timeInDays * 24 * 60 * 60 * 1000;
+//        Date date = new Date(time);
+//
+//        SimpleDateFormat formater = new SimpleDateFormat("E, MMM, d");
+//        return formater.format(date).toString();
+//    }
 
-        SimpleDateFormat formater = new SimpleDateFormat("E, MMM, d");
-        return formater.format(date).toString();
-    }
-
-    private String formatHighLows(double high, double low){
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-        String unitType = prefs.getString(
-                mContext.getString(R.string.pref_unit_key),
-                mContext.getString(R.string.pref_unit_metric));
-
-        if (unitType.equals(mContext.getString(R.string.pref_unit_imperial))) {
-            high = high * 1.8 + 32;
-            low = low *1.8 + 32;
-        } else if(!unitType.equals(mContext.getString(R.string.pref_unit_metric))){
-            Log.e(TAG, "Unsupported unit type");
-        }
-
-        long roundedHigh = Math.round(high);
-        long roundedLow = Math.round(low);
-
-        String returnString = roundedHigh + "/" + roundedLow;
-        return returnString;
-        //return Long.toString(roundedHigh) + "/" + Long.toString(roundedLow);
-    }
+//    private String formatHighLows(double high, double low){
+//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+//        String unitType = prefs.getString(
+//                mContext.getString(R.string.pref_unit_key),
+//                mContext.getString(R.string.pref_unit_metric));
+//
+//        if (unitType.equals(mContext.getString(R.string.pref_unit_imperial))) {
+//            high = high * 1.8 + 32;
+//            low = low *1.8 + 32;
+//        } else if(!unitType.equals(mContext.getString(R.string.pref_unit_metric))){
+//            Log.e(TAG, "Unsupported unit type");
+//        }
+//
+//        long roundedHigh = Math.round(high);
+//        long roundedLow = Math.round(low);
+//
+//        String returnString = roundedHigh + "/" + roundedLow;
+//        return returnString;
+//        //return Long.toString(roundedHigh) + "/" + Long.toString(roundedLow);
+//    }
 
     long addLocation(String locationSetting, String cityName, double lat, double lon) {
         long locationId;
@@ -204,22 +200,22 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
         return locationId;
     }
 
-    String[] convertContentValuesToUXFormat(Vector<ContentValues> cvv){
-        String[] returnString = new String[cvv.size()];
-
-        for (int i = 0; i < cvv.size(); i++){
-            ContentValues value = cvv.elementAt(i);
-            String highAndLow = formatHighLows(
-                    value.getAsDouble(WeatherContract.WeatherEntry.COLUMN_MAX_TEMP),
-                    value.getAsDouble(WeatherContract.WeatherEntry.COLUMN_MIN_TEMP));
-            returnString[i] = getReadableDateString(value.getAsLong(WeatherContract.WeatherEntry.COLUMN_DATE)) + " - " +
-                    value.getAsString(WeatherContract.WeatherEntry.COLUMN_SHORT_DESC) + " - " +
-                    highAndLow;
-
-        }
-
-        return returnString;
-    }
+//    String[] convertContentValuesToUXFormat(Vector<ContentValues> cvv){
+//        String[] returnString = new String[cvv.size()];
+//
+//        for (int i = 0; i < cvv.size(); i++){
+//            ContentValues value = cvv.elementAt(i);
+//            String highAndLow = formatHighLows(
+//                    value.getAsDouble(WeatherContract.WeatherEntry.COLUMN_MAX_TEMP),
+//                    value.getAsDouble(WeatherContract.WeatherEntry.COLUMN_MIN_TEMP));
+//            returnString[i] = getReadableDateString(value.getAsLong(WeatherContract.WeatherEntry.COLUMN_DATE)) + " - " +
+//                    value.getAsString(WeatherContract.WeatherEntry.COLUMN_SHORT_DESC) + " - " +
+//                    highAndLow;
+//
+//        }
+//
+//        return returnString;
+//    }
 
     private String[] getWeatherDataFromJson(String forecastJsonStr, String locationSetting)
             throws JSONException {
@@ -322,30 +318,30 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
                         cvvArray
                 );
             }
-
-            // Sort order:  Ascending, by date.
-            String sortOrder = WeatherContract.WeatherEntry.COLUMN_DATE + " ASC";
-            Uri weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithStartDate(
-                    locationSetting, System.currentTimeMillis());
-
-            // Students: Uncomment the next lines to display what what you stored in the bulkInsert
-            Cursor cur = mContext.getContentResolver().query(weatherForLocationUri,
-                    null, null, null, sortOrder);
-
-            cvvVector = new Vector<ContentValues>(cur.getCount());
-            if ( cur.moveToFirst() ) {
-                do {
-                    ContentValues cv = new ContentValues();
-                    DatabaseUtils.cursorRowToContentValues(cur, cv);
-                    cvvVector.add(cv);
-                } while (cur.moveToNext());
-            }
+//
+//            // Sort order:  Ascending, by date.
+//            String sortOrder = WeatherContract.WeatherEntry.COLUMN_DATE + " ASC";
+//            Uri weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithStartDate(
+//                    locationSetting, System.currentTimeMillis());
+//
+//            // Students: Uncomment the next lines to display what what you stored in the bulkInsert
+//            Cursor cur = mContext.getContentResolver().query(weatherForLocationUri,
+//                    null, null, null, sortOrder);
+//
+//            cvvVector = new Vector<ContentValues>(cur.getCount());
+//            if ( cur.moveToFirst() ) {
+//                do {
+//                    ContentValues cv = new ContentValues();
+//                    DatabaseUtils.cursorRowToContentValues(cur, cv);
+//                    cvvVector.add(cv);
+//                } while (cur.moveToNext());
+//            }
 
             Log.d(TAG, "FetchWeatherTask Complete. " + cvvVector.size() + " Inserted");
 
-            String[] resultString = convertContentValuesToUXFormat(cvvVector);
+            //String[] resultString = convertContentValuesToUXFormat(cvvVector);
 
-            return resultString;
+            return null;
         } catch (JSONException e){
             Log.e(TAG, e.getMessage(), e);
             e.printStackTrace();
