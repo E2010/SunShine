@@ -5,5 +5,6 @@
     android:name="com.torstar.sunshine.MainActivityFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:tag="@string/main_fragment_tag"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:layout="@layout/fragment_main" />

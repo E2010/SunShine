@@ -87,8 +87,10 @@ public class MainActivity extends AppCompatActivity {
         String locationSetting = Utility.getPreferredLocation(this);
 
         if(locationSetting!= null && !locationSetting.equals(mLocation)){
+            //MainActivityFragment mf = (MainActivityFragment)getSupportFragmentManager()
+                    //.findFragmentById(R.id.fragment);
             MainActivityFragment mf = (MainActivityFragment)getSupportFragmentManager()
-                    .findFragmentById(R.id.fragment);
+                    .findFragmentByTag(getString(R.string.main_fragment_tag));
             if (mf != null) {
                 mf.onLocationChanged();
             }
