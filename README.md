@@ -6,11 +6,12 @@ The code in this course was build on older Android Studio.
 
 It is still ongoing. 
 
-Lesson 1: Create Project SunShine   (Finished)<br/>
-Lesson 2: Connect SunShine to the Cloud (Finished)<br/>
-Lesson 3: New Activities and Intents (Finished)<br/>
-Lesson 4A: Activity Lifecycle and Data (Finished)<br/>
-Lesson 4B: Content Provider (Finished)<br/>
+Lesson 1: Create Project SunShine   (Done)<br/>
+Lesson 2: Connect SunShine to the Cloud (Done)<br/>
+Lesson 3: New Activities and Intents (Done)<br/>
+Lesson 4A: Activity Lifecycle and Data (Done)<br/>
+Lesson 4B: Content Provider (Done)<br/>
+Lesson 4C: Hooking it up with Loader (Done)<br/>
 
 <h2>API KEY</h2>
 This app is just for personal use. But by any chance if someone want to take a look.
