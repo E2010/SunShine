@@ -6,8 +6,8 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
@@ -24,15 +24,23 @@ public class WeatherContract {
     public static final String PATH_WEATHER = "weather";
     public static final String PATH_LOCATION = "location";
 
-    public static long normalizeDate(long startDate){
+    public static long normalizeDate(long startDateInMillis){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd");
+        String tempDate0 = dateFormat.format(startDateInMillis);
         // normalize the start date to the beginning of the (UTC) day
         GregorianCalendar date = (GregorianCalendar)GregorianCalendar.getInstance(TimeZone.getTimeZone("UTC"));
+        //GregorianCalendar date = new GregorianCalendar();
 
-        date.setTime(new Date(startDate));
+        String tempDate1 = dateFormat.format(date.getTimeInMillis());
+
+        date.setTimeInMillis(startDateInMillis);
+        String tempDate2 = dateFormat.format(date.getTimeInMillis());
         date.set(Calendar.HOUR_OF_DAY,0);
         date.set(Calendar.MINUTE, 0);
         date.set(Calendar.SECOND, 0);
         date.set(Calendar.MILLISECOND, 0);
+
+        String tempDate3 = dateFormat.format(date.getTimeInMillis());
 
         long timeInMillis = date.getTimeInMillis();
 

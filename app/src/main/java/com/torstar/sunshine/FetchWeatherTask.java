@@ -21,7 +21,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Date;
 import java.util.Vector;
 
 /**
@@ -258,8 +257,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
             Vector<ContentValues> cvvVector = new Vector<ContentValues>(weatherArray.length());
 
-            Date now = new Date();
-            long nowInDays = WeatherContract.normalizeDate(now.getTime());
+            long nowInDays = WeatherContract.normalizeDate(System.currentTimeMillis());
 
             for(int i = 0; i < weatherArray.length(); i++){
                 long date;

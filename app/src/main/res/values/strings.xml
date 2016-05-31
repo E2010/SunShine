@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
     <string name="app_name">Sunshine</string>
     <string name="action_view_location">Map</string>
     <string name="action_settings">Settings</string>
@@ -68,5 +68,17 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
 
+    <!-- Fragment Tag -->
     <string name="main_fragment_tag" translatable="false">MFTAG</string>
+
+    <!-- Weather Display String -->
+    <string name="today">Today</string>
+    <string name="tomorrow">Tommorrow</string>
+    <string name="format_full_friendly_date"><xliff:g id="day">%1$s</xliff:g>, <xliff:g id="date">%2$s</xliff:g></string>
+    <string name="format_temperature"><xliff:g id="temprature">%1.0f</xliff:g>&#176;</string>
+    <string name="format_humidity">Humidity: <xliff:g id="humidity">%1.0f</xliff:g>%%</string>
+    <string name="format_wind_metric">Wind: <xliff:g id="speed">%1.0f</xliff:g> km/h <xliff:g id="direction">%2$s</xliff:g></string>
+    <string name="format_wind_imperial">Wind: <xliff:g id="speed">%1.0f</xliff:g> mph <xliff:g id="direction">%2$s</xliff:g></string>
+    <string name="format_pressure">Pressure: <xliff:g id="pressure">%1.0f</xliff:g> hpa</string>
+
 </resources>
