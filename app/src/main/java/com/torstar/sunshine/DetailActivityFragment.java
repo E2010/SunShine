@@ -84,7 +84,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         Intent intent= getActivity().getIntent();
         View rootView = inflater.inflate(R.layout.fragment_detail_antivity, container, false);
 
-        if (intent != null){
+        if (intent != null && intent.getDataString() != null ){
             mForecastUriStr = intent.getDataString();
         }
 
@@ -123,6 +123,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        if (mForecastUriStr == null) return null;
+
         Uri uri = Uri.parse(mForecastUriStr);
 
 

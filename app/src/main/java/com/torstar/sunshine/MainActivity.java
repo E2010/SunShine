@@ -35,11 +35,11 @@ public class MainActivity extends AppCompatActivity {
         if (view != null) {
             mTwoPanel = true;
 
-//            if (savedInstanceState==null){
-//                getSupportFragmentManager().beginTransaction()
-//                        .replace(R.id.weather_detail_container, new DetailActivityFragment(), DETAILFRAGMENT_TAG)
-//                        .commit();
-//            }
+            if (savedInstanceState==null){
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.weather_detail_container, new DetailActivityFragment())
+                        .commit();
+            }
         } else {
             mTwoPanel = false;
         }
