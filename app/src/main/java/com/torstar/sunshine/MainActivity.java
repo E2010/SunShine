@@ -119,8 +119,14 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
     @Override
     public void onItemSelected(Uri contentUri) {
         if (mTwoPanel) {
+            Bundle args = new Bundle();
+            args.putParcelable(DetailActivityFragment.DETAIL_URI, contentUri);
+
+            DetailActivityFragment detailActivityFragment = new DetailActivityFragment();
+            detailActivityFragment.setArguments(args);
+
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.weather_detail_container, new DetailActivityFragment(), DETAILFRAGMENT_TAG)
+                    .replace(R.id.weather_detail_container, detailActivityFragment, DETAILFRAGMENT_TAG)
                     .commit();
         } else {
             // Open Detail View

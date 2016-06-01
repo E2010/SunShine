@@ -57,7 +57,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private ShareActionProvider mShareActionProvider;
     private String mForecastUriStr;
     private String mWeatherStr;
-    private Uri mUri;
+    private Uri mContentUri;
 
     private ImageView mIconView;
     private TextView mDayView;
@@ -81,9 +81,14 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Intent intent= getActivity().getIntent();
         View rootView = inflater.inflate(R.layout.fragment_detail_antivity, container, false);
 
+        Bundle args = getArguments();
+        if (args != null){
+            mContentUri = args.getParcelable(DETAIL_URI);
+        }
+
+        Intent intent= getActivity().getIntent();
         if (intent != null && intent.getDataString() != null ){
             mForecastUriStr = intent.getDataString();
         }
@@ -123,21 +128,34 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        if (mForecastUriStr == null) return null;
+        if (mContentUri != null){
+            CursorLoader cursorLoader = new CursorLoader(
+                    getContext(),
+                    mContentUri,
+                    WEATHER_DETAILS,
+                    null,
+                    null,
+                    null
+            );
+            return cursorLoader;
+        } else {
+            if (mForecastUriStr != null) {
 
-        Uri uri = Uri.parse(mForecastUriStr);
+                Uri uri = Uri.parse(mForecastUriStr);
 
 
-        CursorLoader cursorLoader = new CursorLoader(
-                getContext(),
-                uri,
-                WEATHER_DETAILS,
-                null,
-                null,
-                null
-        );
-
-        return cursorLoader;
+                CursorLoader cursorLoader = new CursorLoader(
+                        getContext(),
+                        uri,
+                        WEATHER_DETAILS,
+                        null,
+                        null,
+                        null
+                );
+                return cursorLoader;
+            }
+            return null;
+        }
     }
 
     @Override
