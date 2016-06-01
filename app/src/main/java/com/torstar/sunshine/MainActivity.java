@@ -112,6 +112,11 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
             if (mf != null) {
                 mf.onLocationChanged();
             }
+
+            DetailActivityFragment df = (DetailActivityFragment)getSupportFragmentManager().findFragmentByTag(DETAILFRAGMENT_TAG);
+            if (df != null){
+                df.onLocationChanged(locationSetting);
+            }
             mLocation = locationSetting;
         }
     }

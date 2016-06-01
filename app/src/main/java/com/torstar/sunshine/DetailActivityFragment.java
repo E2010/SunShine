@@ -55,7 +55,6 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private static final int COL_CONDITION_ID = 9;
 
     private ShareActionProvider mShareActionProvider;
-    private String mForecastUriStr;
     private String mWeatherStr;
     private Uri mContentUri;
 
@@ -86,11 +85,6 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         Bundle args = getArguments();
         if (args != null){
             mContentUri = args.getParcelable(DETAIL_URI);
-        }
-
-        Intent intent= getActivity().getIntent();
-        if (intent != null && intent.getDataString() != null ){
-            mForecastUriStr = intent.getDataString();
         }
 
         mIconView = (ImageView)rootView.findViewById(R.id.iconView);
@@ -138,24 +132,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                     null
             );
             return cursorLoader;
-        } else {
-            if (mForecastUriStr != null) {
-
-                Uri uri = Uri.parse(mForecastUriStr);
-
-
-                CursorLoader cursorLoader = new CursorLoader(
-                        getContext(),
-                        uri,
-                        WEATHER_DETAILS,
-                        null,
-                        null,
-                        null
-                );
-                return cursorLoader;
-            }
-            return null;
         }
+        return null;
     }
 
     @Override
@@ -207,6 +185,19 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
+
+    public void onLocationChanged(String locationSetting){
+        Uri uri = mContentUri;
+
+        if (uri != null) {
+            long date = WeatherContract.WeatherEntry.getDateFromUri(uri);
+            Uri updateUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(
+                    locationSetting,
+                    date*24*60*60*1000);
+            mContentUri = updateUri;
+            getLoaderManager().restartLoader(DETAIL_LOADER, null, this);
+        }
     }
 
     private Intent createShareForecastIntent(){
