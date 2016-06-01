@@ -26,6 +26,8 @@ import com.torstar.sunshine.data.WeatherContract;
  * A placeholder fragment containing a simple view.
  */
 public class DetailActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
+    static final String DETAIL_URI = "URI";
+
     private static final int DETAIL_LOADER = 0;
 
     private static final String[] WEATHER_DETAILS = {
@@ -55,6 +57,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private ShareActionProvider mShareActionProvider;
     private String mForecastUriStr;
     private String mWeatherStr;
+    private Uri mUri;
 
     private ImageView mIconView;
     private TextView mDayView;

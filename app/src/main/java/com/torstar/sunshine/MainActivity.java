@@ -14,7 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+    private final String TAG = MainActivity.class.getSimpleName();
+    private static final String DETAILFRAGMENT_TAG = "DFTAG";
+
     private String mLocation;
+    private boolean mTwoPanel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,20 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mLocation = Utility.getPreferredLocation(this);
+
+        View view = findViewById(R.id.weather_detail_container);
+
+        if (view != null) {
+            mTwoPanel = true;
+
+//            if (savedInstanceState==null){
+//                getSupportFragmentManager().beginTransaction()
+//                        .replace(R.id.weather_detail_container, new DetailActivityFragment(), DETAILFRAGMENT_TAG)
+//                        .commit();
+//            }
+        } else {
+            mTwoPanel = false;
+        }
 
         // The forecast fragment is added in layout xml file so no need to add again here.
         // In the code that update record when user change location, will use fragment id instead
