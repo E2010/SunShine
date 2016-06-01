@@ -1,6 +1,5 @@
 package com.torstar.sunshine;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -55,6 +54,10 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     public MainActivityFragment() {
     }
 
+    public interface Callback {
+        public void onItemSelected(Uri contentUri);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -95,13 +98,11 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
                 if (cursor != null) {
                     String locationSetting = Utility.getPreferredLocation(getContext());
 
-                    // Open Detail View
-                    Intent intent = new Intent(getContext(), DetailActivity.class);
+                    Uri contentUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(
+                            locationSetting,
+                            cursor.getLong(MainActivityFragment.COL_WEATHER_DATE)*24*60*60*1000);
 
-                    intent.setData(WeatherContract.WeatherEntry.buildWeatherLocationWithDate(locationSetting,
-                            cursor.getLong(MainActivityFragment.COL_WEATHER_DATE)*24*60*60*1000));
-
-                    startActivity(intent);
+                    ((Callback) getActivity()).onItemSelected(contentUri);
                 }
             }
         });

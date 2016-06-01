@@ -13,7 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainActivityFragment.Callback {
     private final String TAG = MainActivity.class.getSimpleName();
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
 
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (savedInstanceState==null){
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.weather_detail_container, new DetailActivityFragment())
+                        .replace(R.id.weather_detail_container, new DetailActivityFragment(), DETAILFRAGMENT_TAG)
                         .commit();
             }
         } else {
@@ -116,5 +116,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onItemSelected(Uri contentUri) {
+        if (mTwoPanel) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.weather_detail_container, new DetailActivityFragment(), DETAILFRAGMENT_TAG)
+                    .commit();
+        } else {
+            // Open Detail View
+            Intent intent = new Intent(this, DetailActivity.class);
 
+            intent.setData(contentUri);
+
+            startActivity(intent);
+        }
+    }
 }
