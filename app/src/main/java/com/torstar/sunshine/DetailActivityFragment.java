@@ -80,7 +80,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_detail_antivity, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_detail_activity, container, false);
 
         Bundle args = getArguments();
         if (args != null){
