@@ -54,6 +54,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     static final int COL_COORD_LONG = 8;
 
     private ForecastAdapter mWeatherListAdapter;
+    private boolean mUseTodayLayout;
 
     public MainActivityFragment() {
     }
@@ -115,6 +116,8 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
         if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_POS_KEY)){
             mPostion = savedInstanceState.getInt(SELECTED_POS_KEY);
         }
+
+        mWeatherListAdapter.setmUseTodayLayout(mUseTodayLayout);
 
         return rootView;
     }
@@ -202,6 +205,13 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     void onLocationChanged(){
         updateWeather();
         getLoaderManager().restartLoader(FORECAST_LOADER, null, this);
+    }
+
+    public void setUseTodayLayout(boolean useTodayLayout){
+        mUseTodayLayout = useTodayLayout;
+        if (mWeatherListAdapter != null ) {
+            mWeatherListAdapter.setmUseTodayLayout(useTodayLayout);
+        }
     }
 
     /*public class FetchWeatherTask extends AsyncTask<String, Void, String[]>{

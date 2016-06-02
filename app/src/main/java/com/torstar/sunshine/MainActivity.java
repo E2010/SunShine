@@ -42,7 +42,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
             }
         } else {
             mTwoPanel = false;
+            getSupportActionBar().setElevation(0f);
         }
+
+        MainActivityFragment mainActivityFragment = ((MainActivityFragment)getSupportFragmentManager()
+        .findFragmentById(R.id.main_fragment));
+        mainActivityFragment.setUseTodayLayout(!mTwoPanel);
 
         // The forecast fragment is added in layout xml file so no need to add again here.
         // In the code that update record when user change location, will use fragment id instead

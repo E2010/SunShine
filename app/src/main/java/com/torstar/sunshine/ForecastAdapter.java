@@ -18,6 +18,8 @@ public class ForecastAdapter extends CursorAdapter{
 
     private Context mContext;
 
+    private boolean mUseTodayLayout;
+
     public ForecastAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
         mContext = context;
@@ -29,8 +31,8 @@ public class ForecastAdapter extends CursorAdapter{
 
         int weatherId = cursor.getInt(MainActivityFragment.COL_WEATHER_CONDITION_ID);
         int viewType = getItemViewType(cursor.getPosition());
-        int iconId = (viewType == VIEW_TYPE_TODAY) ? Utility.getArtResourceForWeatherCondition(weatherId) : Utility.getIconResourceForWeatherCondition(weatherId);
-        viewHolder.iconView.setImageResource(iconId);
+        int imageViewSrcId = (viewType == VIEW_TYPE_TODAY) ? Utility.getArtResourceForWeatherCondition(weatherId) : Utility.getIconResourceForWeatherCondition(weatherId);
+        viewHolder.iconView.setImageResource(imageViewSrcId);
 
         String date = Utility.getFriendlyDayString(context, cursor.getLong(MainActivityFragment.COL_WEATHER_DATE));
         viewHolder.dateView.setText(date);
@@ -80,7 +82,7 @@ public class ForecastAdapter extends CursorAdapter{
 
     @Override
     public int getItemViewType(int position) {
-        return (position == 0) ? VIEW_TYPE_TODAY: VIEW_TYPE_FUTURE;
+        return (position == 0 && mUseTodayLayout) ? VIEW_TYPE_TODAY: VIEW_TYPE_FUTURE;
     }
 
    /* private String formatHighLows(double high, double low){
@@ -117,5 +119,9 @@ public class ForecastAdapter extends CursorAdapter{
             highTempView = (TextView)view.findViewById(R.id.list_item_high_textview);
             lowTempView = (TextView)view.findViewById(R.id.list_item_low_textview);
         }
+    }
+
+    public void setmUseTodayLayout(boolean useTodayLayout){
+        mUseTodayLayout = useTodayLayout;
     }
 }
