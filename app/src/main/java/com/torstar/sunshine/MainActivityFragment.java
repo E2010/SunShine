@@ -25,6 +25,10 @@ import com.torstar.sunshine.data.WeatherContract;
 public class MainActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private final String TAG = MainActivityFragment.class.getSimpleName();
 
+    private int mPostion = ListView.INVALID_POSITION;
+    private static final String SELECTED_POS_KEY = "selected_position";
+    private ListView mListView;
+
     private static final int FORECAST_LOADER = 0;
 
     private static final String[] FORECAST_COLUMNS = {
@@ -87,11 +91,11 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
 
         // Set Listview Adapter
-        ListView weatherListview = (ListView)rootView.findViewById(R.id.listview_forecast);
+        mListView = (ListView)rootView.findViewById(R.id.listview_forecast);
 
-        weatherListview.setAdapter(mWeatherListAdapter);
+        mListView.setAdapter(mWeatherListAdapter);
 
-        weatherListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
@@ -104,8 +108,13 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
                     ((Callback) getActivity()).onItemSelected(contentUri);
                 }
+                mPostion = position;
             }
         });
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_POS_KEY)){
+            mPostion = savedInstanceState.getInt(SELECTED_POS_KEY);
+        }
 
         return rootView;
     }
@@ -144,12 +153,14 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mWeatherListAdapter.swapCursor(data);
+        if (mPostion != ListView.INVALID_POSITION){
+            mListView.smoothScrollToPosition(mPostion);
+        }
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mWeatherListAdapter.swapCursor(null);
-
     }
 
     @Override
@@ -172,6 +183,14 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
         );
 
         return cursorLoader;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        if (mPostion != ListView.INVALID_POSITION){
+            outState.putInt(SELECTED_POS_KEY, mPostion);
+        }
+        super.onSaveInstanceState(outState);
     }
 
     private void updateWeather(){
