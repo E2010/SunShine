@@ -6,9 +6,8 @@
     android:layout_height="match_parent">
 
     <fragment
-        android:layout_width="0dp"
+        android:layout_width="430dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:id="@+id/main_fragment"
         android:name="com.torstar.sunshine.MainActivityFragment"
         android:tag="@string/main_fragment_tag"

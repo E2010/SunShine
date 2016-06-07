@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/sunshine_blue</item>
         <item name="colorPrimaryDark">@color/sunshine_dark_blue</item>
         <item name="actionBarStyle">@style/ForecastTheme</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="ActionBar.Solid.Sunshine.NoTitle" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">

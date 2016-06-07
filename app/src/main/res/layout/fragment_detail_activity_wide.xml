@@ -17,21 +17,25 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="0dp"
+            android:layout_width="180dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/day_textView"
-                android:layout_margin="0dp"
-                android:layout_gravity="top" />
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="24sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/date_textView" />
+                android:id="@+id/date_textView"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="20sp"
+                android:textColor="@color/grey64"/>
         </LinearLayout>
 
         <LinearLayout
@@ -51,18 +55,22 @@
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="16dp">
+                    android:layout_weight="1">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/high_textView"/>
+                        android:id="@+id/high_textView"
+                        android:fontFamily="sans-serif"
+                        android:textSize="96sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/low_textView"/>
+                        android:id="@+id/low_textView"
+                        android:fontFamily="sans-serif-light"
+                        android:textSize="48sp"
+                        android:textColor="@color/grey64"/>
 
                 </LinearLayout>
 
@@ -82,7 +90,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/detail_desc_textView" />
+                        android:id="@+id/detail_desc_textView"
+                        android:fontFamily="sans-serif-condensed"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="@color/grey64"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -90,19 +101,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/humidity_textView"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-condensed"
+                android:textAppearance="?android:textAppearanceLarge"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/wind_textView"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif-condensed"
+                android:textAppearance="?android:textAppearanceLarge"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/pressure_textView"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif-condensed"
+                android:textAppearance="?android:textAppearanceLarge"/>
 
         </LinearLayout>
 

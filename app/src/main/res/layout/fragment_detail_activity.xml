@@ -19,35 +19,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/day_textView"
-            android:layout_margin="0dp"
-            android:layout_gravity="top" />
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="24sp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/date_textView" />
+            android:id="@+id/date_textView"
+            android:textColor="@color/grey64"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="16sp"/>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="12"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/high_textView"/>
+                    android:id="@+id/high_textView"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="96sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/low_textView"/>
+                    android:id="@+id/low_textView"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="48sp"
+                    android:textColor="@color/grey64"/>
             </LinearLayout>
 
             <LinearLayout
@@ -55,17 +66,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:layout_weight="1">
+                android:layout_weight="10">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/iconView" />
+                    android:id="@+id/iconView"
+                    android:contentDescription="@string/weather_condition" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/detail_desc_textView" />
+                    android:id="@+id/detail_desc_textView"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="@color/grey64"
+                    android:textAppearance="?android:textAppearanceLarge"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -73,19 +88,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/humidity_textView"
-            android:layout_marginTop="20dp" />
+            android:fontFamily="sans-serif-light"
+            android:textAppearance="?android:textAppearanceLarge"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/wind_textView"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif-light"
+            android:textAppearance="?android:textAppearanceLarge"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/pressure_textView"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif-light"
+            android:textAppearance="?android:textAppearanceLarge"/>
 
     </LinearLayout>
 
