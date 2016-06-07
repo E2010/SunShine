@@ -17,6 +17,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -131,6 +132,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         if (actionBar != null) {
             // Show the Up button in the action bar.
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setBackgroundDrawable(ContextCompat.getDrawable(this, R.color.sunshine_blue));
+            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE, ActionBar.DISPLAY_SHOW_TITLE|ActionBar.DISPLAY_USE_LOGO);
         }
     }
 

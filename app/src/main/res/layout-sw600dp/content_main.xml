@@ -12,7 +12,8 @@
         android:id="@+id/main_fragment"
         android:name="com.torstar.sunshine.MainActivityFragment"
         android:tag="@string/main_fragment_tag"
-        tools:layout="@layout/fragment_main"/>
+        tools:layout="@layout/fragment_main"
+        android:layout_marginTop="?attr/actionBarSize"/>
 
 
     <FrameLayout

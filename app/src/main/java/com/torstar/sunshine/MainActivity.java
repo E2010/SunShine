@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
 
         View view = findViewById(R.id.weather_detail_container);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
+
         if (view != null) {
             mTwoPanel = true;
 
@@ -42,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
             }
         } else {
             mTwoPanel = false;
-            getSupportActionBar().setElevation(0f);
+            actionBar.setElevation(0f);
         }
 
         MainActivityFragment mainActivityFragment = ((MainActivityFragment)getSupportFragmentManager()
